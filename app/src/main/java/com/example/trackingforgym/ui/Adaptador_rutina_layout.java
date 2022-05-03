@@ -9,25 +9,41 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trackingforgym.R;
 
-public class Adaptador_rutina_layout extends RecyclerView.Adapter<Adaptador_rutina_layout.ViewHolder> {
+public class Adaptador_rutina_layout extends RecyclerView.Adapter<Adaptador_rutina_layout.ViewHolder> implements View.OnClickListener{
 
     private String[] localDataSet;
+    View.OnClickListener listener;
 
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener=listener;
+    }
+
+    public String getDatos (int i){
+        return localDataSet[i];
+    };
+
+    @Override
+    public void onClick(View view) {
+        if(listener!=null){
+            listener.onClick(view);
+        }
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
+        private final TextView titulo;
 
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
-            textView = (TextView) view.findViewById(R.id.textView);
+            titulo = (TextView) view.findViewById(R.id.tituloLayoutRutina);
         }
 
         public TextView getTextView() {
-            return textView;
+            return titulo;
         }
     }
 
@@ -47,7 +63,7 @@ public class Adaptador_rutina_layout extends RecyclerView.Adapter<Adaptador_ruti
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.rutina_layout, null, false);
-
+        view.setOnClickListener(this);
         return new ViewHolder(view);
     }
 
@@ -57,7 +73,8 @@ public class Adaptador_rutina_layout extends RecyclerView.Adapter<Adaptador_ruti
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        //viewHolder.getTextView().setText(localDataSet[position]);
+        System.out.println(localDataSet[position]);
+        viewHolder.getTextView().setText(localDataSet[position]);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
