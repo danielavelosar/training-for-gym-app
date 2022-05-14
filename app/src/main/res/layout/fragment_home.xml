@@ -30,7 +30,6 @@
             android:id="@+id/btnComoEstuboHoy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="hideShowSeekBar"
             android:layout_marginBottom="35dp"
             android:text="Como estubo tu entrenamiento hoy" />
 

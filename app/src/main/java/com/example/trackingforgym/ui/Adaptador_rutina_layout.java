@@ -1,17 +1,20 @@
 package com.example.trackingforgym.ui;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trackingforgym.R;
+import com.example.trackingforgym.data.Rutine;
 
 public class Adaptador_rutina_layout extends RecyclerView.Adapter<Adaptador_rutina_layout.ViewHolder> implements View.OnClickListener{
 
-    private String[] localDataSet;
+    private Rutine[] localDataSet;
     View.OnClickListener listener;
 
     /**
@@ -23,7 +26,7 @@ public class Adaptador_rutina_layout extends RecyclerView.Adapter<Adaptador_ruti
     }
 
     public String getDatos (int i){
-        return localDataSet[i];
+        return localDataSet[i].getNombre();
     };
 
     @Override
@@ -35,15 +38,20 @@ public class Adaptador_rutina_layout extends RecyclerView.Adapter<Adaptador_ruti
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView titulo;
+        ImageView fig;
 
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
             titulo = (TextView) view.findViewById(R.id.tituloLayoutRutina);
+            fig =(ImageView) view.findViewById(R.id.imageView5);
         }
 
         public TextView getTextView() {
             return titulo;
+        }
+        public ImageView getImageView() {
+            return fig;
         }
     }
 
@@ -53,7 +61,7 @@ public class Adaptador_rutina_layout extends RecyclerView.Adapter<Adaptador_ruti
      * @param dataSet String[] containing the data to populate views to be used
      * by RecyclerView.
      */
-    public Adaptador_rutina_layout(String[] dataSet) {
+    public Adaptador_rutina_layout(Rutine[] dataSet) {
         localDataSet = dataSet;
     }
 
@@ -74,7 +82,8 @@ public class Adaptador_rutina_layout extends RecyclerView.Adapter<Adaptador_ruti
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         System.out.println(localDataSet[position]);
-        viewHolder.getTextView().setText(localDataSet[position]);
+        viewHolder.getTextView().setText(localDataSet[position].getNombre());
+        viewHolder.getImageView().setBackgroundColor(Color.parseColor(localDataSet[position].getColor()));
     }
 
     // Return the size of your dataset (invoked by the layout manager)

@@ -6,8 +6,6 @@ import android.os.StrictMode;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -15,12 +13,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trackingforgym.data.Session;
 import com.example.trackingforgym.databinding.ActivityMainBinding;
-import com.example.trackingforgym.ui.Adaptador_rutina_layout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -31,10 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     NavController navController;
 
-    LinearLayout contenedorSeekBarRutina;
-    RecyclerView recycler;
-    Adaptador_rutina_layout adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,24 +33,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         confRed();
-        //DataBase.addUser("ads","asd","asd");
         new Session();
         if (!Session.getSession()) {
             definirSession();
             System.out.println("paso");
         }
 
-
-
-        /*setSupportActionBar(binding.appBarMain.toolbar);
-
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
         setSupportActionBar(findViewById(R.id.toolbar));
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_menu, R.id.nav_stats,R.id.nav_historic)
                 .setOpenableLayout(drawer)
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -83,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         setElements();
-        //configurarSpinnerHome();
-
         setInfNavButtons();
     }
 
@@ -92,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView btnHomeBar = (ImageView) findViewById(R.id.btnHomeBar);
         ImageView btnMenuBar = (ImageView) findViewById(R.id.btnMenuBar);
         ImageView btnStatsBar = (ImageView) findViewById(R.id.btnStatsBar);
+        ImageView btnHistoricBar =(ImageView) findViewById(R.id.btnHistoryBar);
         btnHomeBar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -103,37 +81,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 System.out.println("ad");
-                navController.navigate(R.id.nav_gallery);
+                navController.navigate(R.id.nav_menu);
             }
         });
         btnStatsBar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 System.out.println("joasd");
-                navController.navigate(R.id.nav_slideshow);
+                navController.navigate(R.id.nav_stats);
             }
         });
-        /*binding.appBarMain.btnHomeBar.setOnClickListener(new View.OnClickListener(){
+        btnHistoricBar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                System.out.println("jome");
-                navController.navigate(R.id.nav_home);
+                System.out.println("joasd");
+                navController.navigate(R.id.nav_historic);
+
             }
         });
-        binding.appBarMain.btnMenuBar.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                System.out.println("as");
-                navController.navigate(R.id.nav_gallery);
-            }
-        });
-        binding.appBarMain.btnStatsBar.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                System.out.println("adf");
-                navController.navigate(R.id.nav_slideshow);
-            }
-        });*/
     }
 
     private void confRed(){
@@ -149,54 +114,10 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         System.out.println("de vuelta");
-
-        setRecycler();
     }
 
     public void setElements(){
-        contenedorSeekBarRutina=(LinearLayout) findViewById(R.id.contenerdorSeekBarEntrenamiento);
 
-        setRecycler();
-    }
-
-    public void setRecycler(){
-
-        recycler = (RecyclerView) findViewById(R.id.contenedorRutinas);
-        recycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
-
-        String[] rutinas={
-                "1","2","3","4","5","6","31","14","11","121","131","114"
-        };
-
-        adapter=new Adaptador_rutina_layout(rutinas);
-        adapter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                abrirRutinaEspecifica(adapter.getDatos(recycler.getChildAdapterPosition(view)));
-            }
-        });
-        recycler.setAdapter(adapter);
-
-    }
-
-    public void abrirRutinaEspecifica(String str){
-        System.out.println(str);
-        Toast toast = Toast.makeText(this, str, Toast.LENGTH_SHORT);
-        toast.show();
-    }
-
-    /*public  void  configurarSpinnerHome(){
-        Spinner spinner =(Spinner) findViewById(R.id.spinner);
-        String[] textoSpinner ={"intenso","moderado","suave"};
-        spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, textoSpinner));
-    }*/
-
-    public void hideShowSeekBar(View view){
-        System.out.println("oprimido");
-        if(contenedorSeekBarRutina.getVisibility()==View.VISIBLE)
-            contenedorSeekBarRutina.setVisibility(View.GONE);
-        else
-            contenedorSeekBarRutina.setVisibility(View.VISIBLE);
     }
 
     public void definirSession(){
