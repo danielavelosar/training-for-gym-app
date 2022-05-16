@@ -92,7 +92,6 @@ public class HomeFragment extends Fragment {
             }
         });
         recycler.setAdapter(adapter);
-
     }
 
     public void abrirRutinaEspecifica(String str){

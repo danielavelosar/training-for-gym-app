@@ -106,7 +106,7 @@ public class fragment_calculo_rm extends Fragment {
             public void onClick(View view) {
                 int a=Integer.valueOf(repeticiones.getText().toString());
                 Double d=Double.valueOf(pesoLevantado.getText().toString());
-                resultado.setText(Double.toString(d/(1.0278-(0.0278*a))));
+                resultado.setText(Double.toString(Math.round((d/(1.0278-(0.0278*a)))*10)/10)+" Kg");
             }
         });
     }

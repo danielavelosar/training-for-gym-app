@@ -34,10 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
         confRed();
         new Session();
+        /*new Session();
         if (!Session.getSession()) {
             definirSession();
             System.out.println("paso");
-        }
+        }*/
 
         setSupportActionBar(findViewById(R.id.toolbar));
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -113,6 +114,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
+        if (!Session.getSession()) {
+            definirSession();
+            System.out.println("paso");
+        }
         System.out.println("de vuelta");
     }
 
