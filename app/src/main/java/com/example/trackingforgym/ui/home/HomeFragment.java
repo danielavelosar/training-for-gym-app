@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trackingforgym.R;
-import com.example.trackingforgym.data.Bst;
 import com.example.trackingforgym.data.Rutine;
 import com.example.trackingforgym.databinding.FragmentHomeBinding;
 import com.example.trackingforgym.ui.Adaptador_rutina_layout;
@@ -74,13 +73,7 @@ public class HomeFragment extends Fragment {
                     rutinas[i] = r;
                 }
                 long time = new Date().getTime();
-                Bst orderedRoutine = new Bst(rutinas);
-                orderedRoutine.inOrder();
-                int i = 0;
-                for(Rutine rut : orderedRoutine.ret ){
-                    rutinas[i] = rut;
-                    i++;
-                }
+                rutinas = heapSort(rutinas);
 
                 //System.out.println(rutinas);
                 //Rutine[] ret = orderedRoutine.inOrder();
