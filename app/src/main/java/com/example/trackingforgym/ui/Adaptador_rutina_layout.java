@@ -14,7 +14,7 @@ import com.example.trackingforgym.data.Rutine;
 
 public class Adaptador_rutina_layout extends RecyclerView.Adapter<Adaptador_rutina_layout.ViewHolder> implements View.OnClickListener{
 
-    private Rutine[] localDataSet;
+    public Rutine[] localDataSet;
     View.OnClickListener listener;
 
     /**

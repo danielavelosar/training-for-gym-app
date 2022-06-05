@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -18,6 +19,9 @@ import com.example.trackingforgym.R;
 import com.example.trackingforgym.data.Rutine;
 import com.example.trackingforgym.databinding.FragmentHomeBinding;
 import com.example.trackingforgym.ui.Adaptador_rutina_layout;
+
+import java.util.Random;
+import java.util.Date;
 
 public class HomeFragment extends Fragment {
 
@@ -55,6 +59,29 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 hideShowSeekBar(view);
+            }
+        });
+        Button btnprobarTiempo=root.findViewById(R.id.btnprobarTiempo);
+        btnprobarTiempo.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Rutine[] rutinas= new Rutine[2000];
+                for(int i = 0; i<2000; i++){
+                    Random random = new Random(0) ;
+                    Rutine r = new Rutine("#E91E63", "rutina"+i, random.nextInt() );
+                    rutinas[i] = r;
+                }
+                long time = new Date().getTime();
+                rutinas = heapSort(rutinas);
+
+                adapter.localDataSet=rutinas;
+                adapter.notifyDataSetChanged();
+                long timeFinal = new Date().getTime();
+                System.out.println(timeFinal-time);
+                Toast.makeText(getActivity(), "" + (timeFinal- time) + "", Toast.LENGTH_SHORT).show();
+
+
             }
         });
         setRecycler();

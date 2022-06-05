@@ -114,11 +114,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
-        if (!Session.getSession()) {
-            definirSession();
-            System.out.println("paso");
-        }
-        System.out.println("de vuelta");
+        //if (!Session.getSession()) {
+        //    definirSession();
+        //    System.out.println("paso");
+        //}
+        //System.out.println("de vuelta");
     }
 
     public void setElements(){
