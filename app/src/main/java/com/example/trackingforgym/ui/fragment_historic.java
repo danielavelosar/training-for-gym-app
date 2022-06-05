@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trackingforgym.R;
+import com.example.trackingforgym.data.Exercise;
 import com.example.trackingforgym.data.RutineHistoric;
 import com.example.trackingforgym.databinding.FragmentHistoricBinding;
 
@@ -152,6 +153,9 @@ public class fragment_historic extends Fragment {
                 new RutineHistoric("#009688", "Pecho y tricep", new Date(2022,5,16)),
                 new RutineHistoric("#673AB7", "Gluteo", new Date(2020,10,17))
         };
+
+
+
 
         adapter=new Adaptador_Historic_Layout(rutinas);
         adapter.setOnClickListener(new View.OnClickListener() {

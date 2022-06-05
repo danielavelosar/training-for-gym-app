@@ -6,15 +6,28 @@ public class Rutine {
     private int idPropietario;
     private String color;
     private String nombre;
+    public int numero_usos;
 
-    public Rutine(int id, int idpropietario, String color, String nombre ){
+    public Rutine(int id, int idpropietario, String color, String nombre, int num){
         this.id=id;
         this.idPropietario=idpropietario;
         this.color=color;
         this.nombre=nombre;
+        this.numero_usos=num;
+    }
+
+    public Rutine(int id, int idpropietario, String color, String nombre){
+        this.id=id;
+        this.idPropietario=idpropietario;
+        this.color=color;
+        this.nombre=nombre;
+        this.numero_usos=0;
     }
     public Rutine(String color, String nombre ){
-        this(0,0,color,nombre);
+        this(0,0,color,nombre,0);
+    }
+    public Rutine(String color, String nombre, int num){
+        this(0,0,color,nombre,num);
     }
 
     public int getId() {
@@ -47,5 +60,9 @@ public class Rutine {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public boolean mayorQue(Rutine rutina){
+        return this.numero_usos > rutina.numero_usos;
     }
 }

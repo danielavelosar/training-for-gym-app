@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.trackingforgym.R;
+import com.example.trackingforgym.data.Exercise;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +29,15 @@ public class fragment_ejercicios_fav extends Fragment {
     public fragment_ejercicios_fav() {
         // Required empty public constructor
     }
+
+    Exercise[] ejercicios = {
+            new Exercise(1 , 1,  "#E91E63", "hip thrust"),
+            new Exercise(2 , 2,  "#E91E63", "pull up"),
+            new Exercise(2 , 1,  "#E91E63", "sentadilla"),
+            new Exercise(2 , 1,  "#E91E63", "hip bridge")
+
+    };
+
 
     /**
      * Use this factory method to create a new instance of

@@ -68,21 +68,59 @@ public class HomeFragment extends Fragment {
             contenedorSeekBarRutina.setVisibility(View.VISIBLE);
     }
 
+    public Rutine[] heapSort(Rutine[] arr){
+        buildMaxHeap(arr);
+        int heapSize = arr.length - 1;
+        for (int i = arr.length - 1; i > 0; i--) {
+            swap(arr, 0, heapSize);
+            heapSize--;
+            maxHeapify(arr, 0, heapSize);
+        }
+        return(arr);
+    }
+    public static  void maxHeapify(Rutine[] arr, int i, int n) {
+        int leftChild = i * 2 + 1;
+        int rightChild = leftChild + 1;
+        int largest = i;
+        if (leftChild <= n &&  arr[leftChild].mayorQue(arr[i])){
+            largest = leftChild;
+        }
+        if (rightChild <= n && arr[rightChild].mayorQue(arr[largest])) {
+            largest = rightChild;
+        }
+        if (largest != i) {
+            swap(arr, i, largest);
+            maxHeapify(arr, largest, n);
+        }
+    }
+    public static  void buildMaxHeap(Rutine[] arr) {
+        for (int i = arr.length / 2; i > -1; i--) {
+            maxHeapify(arr, i, arr.length - 1);
+        }
+    }
+    public static  void swap(Rutine[] arr, int i, int j) {
+        Rutine temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
     public void setRecycler(){
 
         recycler = (RecyclerView) root.findViewById(R.id.contenedorRutinas);
-        recycler.setLayoutManager(new LinearLayoutManager(root.getContext(),LinearLayoutManager.HORIZONTAL, false));
+        recycler.setLayoutManager(new LinearLayoutManager(root.getContext(),LinearLayoutManager.HORIZONTAL, true));
 
         /*String[] rutinas={
                 "1","2","3","4","5","6","31","14","11","121","131","114"
         };*/
         Rutine[] rutinas= {
-                new Rutine("#E91E63", "Pierna"),
-                new Rutine("#F44336", "tren Sup"),
-                new Rutine("#03A9F4", "tren inf"),
-                new Rutine("#009688", "Pecho y tricep"),
-                new Rutine("#673AB7", "Gluteo")
+                new Rutine("#E91E63", "Pierna", 1),
+                new Rutine("#F44336", "tren Sup",8),
+                new Rutine("#03A9F4", "tren inf",50),
+                new Rutine("#009688", "Pecho y tricep",2),
+                new Rutine("#673AB7", "Gluteo",6)
         };
+
+        rutinas = heapSort(rutinas);
 
         adapter=new Adaptador_rutina_layout(rutinas);
         adapter.setOnClickListener(new View.OnClickListener() {
