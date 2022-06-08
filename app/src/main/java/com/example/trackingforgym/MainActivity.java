@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -114,16 +115,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
-        if (!Session.getSession()) {
+        /*if (!Session.getSession()) {
             definirSession();
             System.out.println("paso");
-        }
+        }*/
         System.out.println("de vuelta");
     }
 
     public void setElements(){
-
+        Button a = (Button) findViewById(R.id.btnCrearEjercicio);
+        /*a.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("btn crear");
+            }
+        });*/
     }
+
 
     public void definirSession(){
         System.out.println("abriendo login");
@@ -144,4 +152,9 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    public void asd(){
+        System.out.println("pressed");
+    }
+
 }

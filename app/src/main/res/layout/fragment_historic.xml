@@ -62,6 +62,13 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <Button
+            android:id="@+id/btnTest"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="test" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerHistorialRutinas"
             android:layout_width="match_parent"

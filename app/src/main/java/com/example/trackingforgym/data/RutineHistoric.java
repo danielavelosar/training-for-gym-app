@@ -4,9 +4,11 @@ import java.util.Date;
 
 public class RutineHistoric extends Rutine{
     private Date fecha;
+    public int fechaInt;
 
-    public RutineHistoric(String color, String nombre, Date fecha){
+    public RutineHistoric(int f, String color, String nombre, Date fecha){
         super(color, nombre);
+        fechaInt=f;
         this.fecha = fecha;
     }
     public RutineHistoric(String color, String nombre){

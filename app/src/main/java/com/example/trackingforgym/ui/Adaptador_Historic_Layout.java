@@ -10,23 +10,57 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trackingforgym.R;
+import com.example.trackingforgym.data.Bst;
+import com.example.trackingforgym.data.Rutine;
 import com.example.trackingforgym.data.RutineHistoric;
 
 import sun.bob.mcalendarview.MCalendarView;
 
 public class Adaptador_Historic_Layout extends RecyclerView.Adapter<Adaptador_Historic_Layout.ViewHolder> implements View.OnClickListener{
 
-    private RutineHistoric[] localDataSet;
+    private Bst localDataSet;
     View.OnClickListener listener;
 
     public void setOnClickListener(View.OnClickListener listener){
         this.listener=listener;
     }
 
-    public String getDatos (int i){
-        return localDataSet[i].getNombre();
-    };
+    public void add(RutineHistoric r){
+        localDataSet.insertar(r);
+        notifyDataSetChanged();
+    }
+    /*public RutineHistoric find(RutineHistoric r){
+        return localDataSet.find(r).getData();
+    }*/
 
+    /*public void addBack(RutineHistoric r){
+        localDataSet.pushBack(r);
+        notifyDataSetChanged();
+    }*/
+    public void pop(RutineHistoric i){
+        localDataSet.remove(i);
+        notifyDataSetChanged();
+    }/*
+    public void pop(int r){
+        localDataSet.pop(r);
+        notifyDataSetChanged();
+    }
+    public void popFront(){
+        localDataSet.popFront();
+        notifyDataSetChanged();
+    }*/
+    public RutineHistoric get(int r){
+        return localDataSet.get(r);
+    }
+    public RutineHistoric find(int r){
+        return localDataSet.find(r).getData();
+    }
+    /*public String getDatos (int i){
+        return localDataSet[i].getNombre();
+    };*/
+    public String getDatos (int i){
+        return localDataSet.get(i).getNombre();
+    };
 
     @Override
     public void onClick(View view) {
@@ -38,8 +72,10 @@ public class Adaptador_Historic_Layout extends RecyclerView.Adapter<Adaptador_Hi
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView titulo;
         private TextView fecha;
+        TextView idT;
         ImageView fig;
         MCalendarView calendarView;
+        Rutine rutine;
 
         public ViewHolder(View view) {
             super(view);
@@ -47,10 +83,14 @@ public class Adaptador_Historic_Layout extends RecyclerView.Adapter<Adaptador_Hi
             titulo = (TextView) view.findViewById(R.id.tituloHistoricLayout);
             fecha = (TextView) view.findViewById(R.id.fechaHistoricLayout);
             fig =(ImageView) view.findViewById(R.id.imageView3);
+            idT=(TextView) view.findViewById(R.id.idT);
         }
 
         public TextView getTextView() {
             return titulo;
+        }
+        public TextView getIdT() {
+            return idT;
         }
         public TextView getFechaTextView() {
             return fecha;
@@ -60,7 +100,7 @@ public class Adaptador_Historic_Layout extends RecyclerView.Adapter<Adaptador_Hi
         }
     }
 
-    public Adaptador_Historic_Layout(RutineHistoric[] dataSet) {
+    public Adaptador_Historic_Layout(Bst dataSet) {
         localDataSet = dataSet;
     }
 
@@ -82,17 +122,24 @@ public class Adaptador_Historic_Layout extends RecyclerView.Adapter<Adaptador_Hi
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        System.out.println(localDataSet[position]);
+        //System.out.println(localDataSet[position]);
         //viewHolder.getFechaTextView().setText(localDataSet[position].getFecha().toString());
-        viewHolder.getFechaTextView().setText(localDataSet[position].getFecha().toString());
+        /*viewHolder.getFechaTextView().setText(localDataSet[position].getFecha().toString());
         viewHolder.getTextView().setText(localDataSet[position].getNombre());
-        viewHolder.getImageView().setBackgroundColor(Color.parseColor(localDataSet[position].getColor()));
-
+        viewHolder.getImageView().setBackgroundColor(Color.parseColor(localDataSet[position].getColor()));*/
+        System.out.println("1 "+localDataSet.get(position).getNombre()+"size "+localDataSet.size);
+        localDataSet.inOrder();
+        viewHolder.getFechaTextView().setText(localDataSet.get(position).getFecha().toString());
+        viewHolder.getTextView().setText(localDataSet.get(position).getNombre());
+        viewHolder.getIdT().setText(Integer.toString(localDataSet.get(position).fechaInt));
+        viewHolder.getImageView().setBackgroundColor(Color.parseColor(localDataSet.get(position).getColor()));
+        viewHolder.rutine=localDataSet.get(position);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return localDataSet.length;
+       // return localDataSet.length;
+        return localDataSet.size;
     }
 }
