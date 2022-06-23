@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        setElements();
+        //setElements();
         setInfNavButtons();
     }
 
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("de vuelta");
     }
 
-    //tal vez este el error
+    /*
     public void setElements(){
         Button ir_crear_ejercicio=(Button) findViewById(R.id.btnCrearEjercicio);
         ir_crear_ejercicio.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    */
 
     public void definirSession(){
         System.out.println("abriendo login");
