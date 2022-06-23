@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("de vuelta");
     }
 
+    //tal vez este el error
     public void setElements(){
         Button ir_crear_ejercicio=(Button) findViewById(R.id.btnCrearEjercicio);
         ir_crear_ejercicio.setOnClickListener(new View.OnClickListener() {
