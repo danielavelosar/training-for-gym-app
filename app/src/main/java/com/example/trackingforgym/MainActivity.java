@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -122,7 +123,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setElements(){
+        Button ir_crear_ejercicio=(Button) findViewById(R.id.btnCrearEjercicio);
+        ir_crear_ejercicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.navigate(R.id.fragment_creacion_ejercicio);
 
+            }
+        });
     }
 
     public void definirSession(){
