@@ -1,11 +1,14 @@
 package com.example.trackingforgym.data;
 
+import java.util.ArrayList;
+
 public class Rutine {
 
     private int id;
     private int idPropietario;
     private String color;
     private String nombre;
+    public ArrayList<Ejercicio> ejercicios;
     public int numero_usos;
 
     public Rutine(int id, int idpropietario, String color, String nombre, int num){
@@ -14,6 +17,7 @@ public class Rutine {
         this.color=color;
         this.nombre=nombre;
         this.numero_usos=num;
+        this.ejercicios=new ArrayList<Ejercicio>();
     }
 
     public Rutine(int id, int idpropietario, String color, String nombre){
@@ -64,5 +68,9 @@ public class Rutine {
 
     public boolean mayorQue(Rutine rutina){
         return this.numero_usos > rutina.numero_usos;
+    }
+
+    public String upload(){
+        return DataBase.addRutine(this);
     }
 }
