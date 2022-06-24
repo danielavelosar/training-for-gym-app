@@ -55,4 +55,26 @@ public class DataBase {
         User[] users=gson.fromJson(resultado , User[].class);
         return users[0];
     }
+
+    public static String addEjercicio(Ejercicio j) {
+        URL=BaseURL+"/addEjercicio.php?nombre="+j.nombre+"&color="+j.color+"&parteCuerpo="+j.parteCuerpo+"&usuario="+Session.getUser().id;
+        return makeRequest(URL);
+    }
+
+    public static Ejercicio getEjercicio(Ejercicio j){
+        URL=BaseURL+"/getEjercicio.php?nombre="+j.nombre+"&color="+j.color+"&parteCuerpo="+j.parteCuerpo;
+        String res =makeRequest(URL);
+        Ejercicio[] ej=gson.fromJson(res , Ejercicio[].class);
+        return ej[0];
+    }
+
+    public static String addRutine(Rutine r) {
+        String ejs ="";
+        for(Ejercicio e : r.ejercicios){
+            ejs=ejs+e.id+",";
+        }
+        ejs=ejs.substring(0,ejs.length()-1);
+        URL=BaseURL+"/addRutina.php?nombre="+r.getNombre()+"&color="+r.getColor()+"&ejercicios="+ejs+"&usuario="+Session.getUser().id;
+        return makeRequest(URL);
+    }
 }
