@@ -7,4 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".registro_por_rutina">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_rutinas"
+        android:layout_width="364dp"
+        android:layout_height="439dp"
+        android:layout_marginTop="250dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
