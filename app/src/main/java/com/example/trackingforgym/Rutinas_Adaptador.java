@@ -17,11 +17,17 @@ public class Rutinas_Adaptador extends RecyclerView.Adapter<Rutinas_Adaptador.Vi
     private List<Lista_Rutinas> mData;
     private LayoutInflater mInflater;
     private Context context;
+    final Rutinas_Adaptador.OnItemClickListener listener;
 
-    public Rutinas_Adaptador(List<Lista_Rutinas> itemList,  Context context) {
+    public interface OnItemClickListener {
+        void onItemClick(Lista_Rutinas item);
+    }
+
+    public Rutinas_Adaptador(List<Lista_Rutinas> itemList,  Context context, Rutinas_Adaptador.OnItemClickListener listener) {
         this.mData = itemList;
         this.mInflater = LayoutInflater.from(context);
         this.context = context;
+        this.listener = listener;
     }
 
     public int getItemCount(){return mData.size();}
@@ -52,6 +58,12 @@ public class Rutinas_Adaptador extends RecyclerView.Adapter<Rutinas_Adaptador.Vi
             iconImage.setColorFilter(Color.parseColor(item.getColo()), PorterDuff.Mode.SRC_IN);
             nombre.setText(item.getNombre());
             status.setText(item.getStatus());
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(item);
+                }
+            });
         }
     }
 

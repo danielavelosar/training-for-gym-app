@@ -18,6 +18,9 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".DescriptionActivity"
+            android:exported="false" />
+        <activity
             android:name=".registro_por_rutina"
             android:exported="false" />
         <activity

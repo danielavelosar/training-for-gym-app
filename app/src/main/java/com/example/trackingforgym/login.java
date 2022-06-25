@@ -51,5 +51,10 @@ public class login extends AppCompatActivity {
         }
 
     }
-
+    /*
+    public void Siguiente(View view){
+        Intent siguiente = new Intent(this, registro_por_rutina.class);
+        startActivity(siguiente);
+    }
+    */
 }

@@ -28,7 +28,7 @@
                 android:layout_gravity="center"
                 android:paddingLeft="14dp"
                 android:paddingRight="14dp"
-                app:srcCompat="@drawable/pesas"
+                app:srcCompat="@drawable/dumbell"
                 android:layout_alignParentLeft="true"/>
             <LinearLayout
                 android:id="@+id/li_la"
@@ -55,7 +55,7 @@
                     android:id="@+id/cityTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Mexico"
+                    android:text="Tren superior"
                     android:textSize="18sp"/>
 
                 </LinearLayout>

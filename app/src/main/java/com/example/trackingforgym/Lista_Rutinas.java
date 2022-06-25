@@ -1,6 +1,8 @@
 package com.example.trackingforgym;
 
-public class Lista_Rutinas {
+import java.io.Serializable;
+
+public class Lista_Rutinas implements Serializable {
     public String colo;
     public String nombre;
     public String citys;
