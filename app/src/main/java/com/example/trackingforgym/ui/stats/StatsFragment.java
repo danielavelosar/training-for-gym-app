@@ -10,7 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.trackingforgym.R;
+import com.example.trackingforgym.data.DataBase;
 import com.example.trackingforgym.data.Session;
+import com.example.trackingforgym.data.User;
 import com.example.trackingforgym.databinding.FragmentStatsBinding;
 
 import java.util.ArrayList;
@@ -29,6 +31,8 @@ public class StatsFragment extends Fragment {
     private StatsViewModel slideshowViewModel;
     private FragmentStatsBinding binding;
     private ColumnChartView chart;
+    ColumnChartView chart1;
+    ColumnChartData data1;
     private ColumnChartData data;
     private boolean hasAxes = true;
     private boolean hasAxesNames = true;
@@ -44,10 +48,14 @@ public class StatsFragment extends Fragment {
         View root = binding.getRoot();
 
         chart = (ColumnChartView) root.findViewById(R.id.chart);
+        chart1= (ColumnChartView) root.findViewById(R.id.chart1);
 
         //chart.setOnValueTouchListener(new ValueTouchListener());
 
         generateDefaultData();;
+        User usuario =Session.getUser();
+        usuario.entrenamientos= DataBase.getEntrenamientos(usuario.getId());
+        usuario.stats=DataBase.getLastStat(usuario.getId());
 
         /*final TextView textView = binding.textStats;
         slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -96,6 +104,43 @@ public class StatsFragment extends Fragment {
         }
         axisX.setValues(mAxisXValues);
         chart.setColumnChartData(data);
+        /////
+
+        List<AxisValue> mAxisXValues1 = new ArrayList<AxisValue>();
+        int numColumns1 = Session.getUser().stats.size();
+        // Column can have many subcolumns, here by default I use 1 subcolumn in each of 8 columns.
+        List<Column> columns1 = new ArrayList<Column>();
+        List<SubcolumnValue> values1;
+        for (int i = 0; i < numColumns1; ++i) {
+
+            values1 = new ArrayList<SubcolumnValue>();
+            for (int j = 0; j < numSubcolumns; ++j) {
+                values1.add(new SubcolumnValue(Session.getUser().stats.get(i).usos, ChartUtils.pickColor()));
+            }
+            mAxisXValues1.add(new AxisValue(i).setLabel(Session.getUser().stats.get(i).nombre));
+            Column column1 = new Column(values1);
+            column1.setHasLabels(hasLabels);
+            column1.setHasLabelsOnlyForSelected(hasLabelForSelected);
+            columns1.add(column1);
+        }
+
+        data1 = new ColumnChartData(columns1);
+        Axis axisX1 = new Axis();;
+        if (hasAxes) {
+
+            Axis axisY1 = new Axis().setHasLines(true);
+            if (hasAxesNames) {
+                axisX1.setName("Ejercicio");
+                axisY1.setName("Usos");
+            }
+            data1.setAxisXBottom(axisX1);
+            data1.setAxisYLeft(axisY1);
+        } else {
+            data1.setAxisXBottom(null);
+            data1.setAxisYLeft(null);
+        }
+        axisX1.setValues(mAxisXValues1);
+        chart1.setColumnChartData(data1);
     }
 
     @Override

@@ -195,4 +195,21 @@ public class DataBase {
         }
         return d;
     }
+
+    public static ArrayList<LastStat> getLastStat(int id){
+        URL=BaseURL+"/getLastStat.php?usuario="+id;
+        String res= makeRequest(URL);
+        System.out.println(res);
+        JsonParser parser = new JsonParser();
+        JsonArray gsonArr = parser.parse(res).getAsJsonArray();
+        ArrayList<LastStat> d = new ArrayList<LastStat>();
+        for (JsonElement obj : gsonArr) {
+            JsonObject gsonObj = obj.getAsJsonObject();
+
+            LastStat a= new LastStat(gsonObj.get("id_serie").getAsInt(),gsonObj.get("nombre").getAsString(),gsonObj.get("usos").getAsInt());
+            d.add(a);
+            System.out.println();
+        }
+        return d;
+    }
 }

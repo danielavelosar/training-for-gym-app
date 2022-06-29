@@ -60,20 +60,7 @@
                     android:layout_height="match_parent"></lecho.lib.hellocharts.view.ColumnChartView>
 
             </FrameLayout>
-            <FrameLayout
-                android:id="@+id/container11"
-                android:layout_width="match_parent"
-                android:layout_height="350dp"
-                android:layout_marginHorizontal="10dp"
-                tools:context="lecho.lib.hellocharts.samples.PieChartActivity"
-                tools:ignore="MergeRootFrame">
 
-                <lecho.lib.hellocharts.view.ColumnChartView
-                    android:id="@+id/chart11"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"></lecho.lib.hellocharts.view.ColumnChartView>
-
-            </FrameLayout>
         </LinearLayout>
     </ScrollView>
 

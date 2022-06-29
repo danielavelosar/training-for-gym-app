@@ -9,6 +9,7 @@ public class User {
     public ArrayList<RutineHistoric> entrenamientos;
     public ArrayList<Ejercicio> ejercicios;
     public RutineHistoric nuevoEntrenamiento;
+    public ArrayList<LastStat> stats;
 
     public int getId() {
         return id;
@@ -36,11 +37,13 @@ public class User {
         rutinas=new ArrayList<Rutine>();
         entrenamientos=new ArrayList<RutineHistoric>();
         nuevoEntrenamiento= new RutineHistoric(0,"","",0,0);
+        stats = new ArrayList<LastStat>();
     }
     public User(int ide, String email){
         id=ide;
         correo= email;
         rutinas=new ArrayList<Rutine>();
         entrenamientos=new ArrayList<RutineHistoric>();
+        stats = new ArrayList<LastStat>();
     }
 }
