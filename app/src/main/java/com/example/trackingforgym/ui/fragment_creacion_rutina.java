@@ -11,12 +11,14 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trackingforgym.R;
 import com.example.trackingforgym.data.DataBase;
 import com.example.trackingforgym.data.Ejercicio;
 import com.example.trackingforgym.data.Rutine;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import sun.bob.mcalendarview.MCalendarView;
@@ -29,6 +31,8 @@ import sun.bob.mcalendarview.MCalendarView;
 public class fragment_creacion_rutina extends Fragment {
     EditText nombreRutina;
     Button crearRutina;
+    FloatingActionButton agregarEjercicio;
+    View root;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -65,9 +69,10 @@ public class fragment_creacion_rutina extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        root = view;
         nombreRutina = (EditText) view.findViewById(R.id.editText_nombre_rutina);
         crearRutina = (Button) view.findViewById(R.id.button_crear);
+        agregarEjercicio = (FloatingActionButton)  view.findViewById(R.id.button_agregar_ejercicios);
         crearRutina.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -80,8 +85,15 @@ public class fragment_creacion_rutina extends Fragment {
                 Rutine nuevaRutina = new Rutine("rojo", "kkl" + nombreRutina.getText().toString());
                 nuevaRutina.ejercicios.add(a);
                 nuevaRutina.upload();
+            };});
+
+            agregarEjercicio.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
+                    Navigation.findNavController(view).navigate(R.id.fragment_creacion_ejercicio);
+                }
             }
-        });
+        );
 
     }
         // or  (ImageView) view.findViewById(R.id.foo);
