@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.trackingforgym.data.Ejercicio;
+
 public class DescriptionActivity extends AppCompatActivity {
 
     TextView titleDescriptionTextView;
@@ -17,17 +19,17 @@ public class DescriptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
 
-        Lista_Rutinas element = (Lista_Rutinas) getIntent().getSerializableExtra("Lista_Rutinas");
+        Ejercicio element = (Ejercicio) getIntent().getSerializableExtra("Lista_Rutinas");
         titleDescriptionTextView = findViewById(R.id.titleDescriptionTextView);
         cityDescriptionTextView = findViewById(R.id.cityDescriptionTextView);
         statusDescriptionTextView = findViewById(R.id.statusDescriptionTextView);
 
         titleDescriptionTextView.setText(element.getNombre());
-        titleDescriptionTextView.setTextColor(Color.parseColor(element.getColo()));
+        titleDescriptionTextView.setTextColor(Color.parseColor(element.getColor()));
 
-        cityDescriptionTextView.setText(element.getCitys());
+        cityDescriptionTextView.setText(element.getNombre());
 
-        statusDescriptionTextView.setText(element.getStatus());
+        statusDescriptionTextView.setText(element.getParteCuerpo());
         statusDescriptionTextView.setTextColor(Color.GRAY);
     }
 }

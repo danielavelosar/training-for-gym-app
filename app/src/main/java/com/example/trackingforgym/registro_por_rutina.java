@@ -9,18 +9,22 @@ import android.os.Bundle;
 import android.util.EventLogTags;
 import android.widget.ListAdapter;
 
+import com.example.trackingforgym.data.Ejercicio;
+import com.example.trackingforgym.data.Rutine;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class registro_por_rutina extends AppCompatActivity {
 
     List<Lista_Rutinas> elements;
+    Rutine rutina;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_por_rutina);
-
+        rutina = (Rutine) getIntent().getSerializableExtra("rutina");
         init();
     }
 
@@ -32,9 +36,9 @@ public class registro_por_rutina extends AppCompatActivity {
         elements.add(new Lista_Rutinas("#008FFF", "Curl de bíceps con mancuernas", "Tren superior", "Fuerte"));
         elements.add(new Lista_Rutinas("#F000FF", "Elevaciones frontales con mancuernas", "Tren superior", "Fuerte"));
 
-        Rutinas_Adaptador rutinas_adaptador = new Rutinas_Adaptador(elements, this, new Rutinas_Adaptador.OnItemClickListener() {
+        Rutinas_Adaptador rutinas_adaptador = new Rutinas_Adaptador(rutina.ejercicios, this, new Rutinas_Adaptador.OnItemClickListener() {
             @Override
-            public void onItemClick(Lista_Rutinas item) {
+            public void onItemClick(Ejercicio item) {
                 moveToDescription(item);
             }
         });
@@ -45,7 +49,7 @@ public class registro_por_rutina extends AppCompatActivity {
 
     }
 
-    public void moveToDescription(Lista_Rutinas item){
+    public void moveToDescription(Ejercicio item){
         Intent intent = new Intent(this, DescriptionActivity.class);
         intent.putExtra("Lista_Rutinas",item);
         startActivity(intent);

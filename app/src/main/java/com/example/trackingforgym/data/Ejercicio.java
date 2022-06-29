@@ -1,6 +1,8 @@
 package com.example.trackingforgym.data;
 
-public class Ejercicio {
+import java.io.Serializable;
+
+public class Ejercicio implements Serializable {
     int id;
     String nombre;
     String color;

@@ -10,12 +10,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.trackingforgym.R;
+import com.example.trackingforgym.data.Session;
 import com.example.trackingforgym.databinding.FragmentStatsBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Column;
 import lecho.lib.hellocharts.model.ColumnChartData;
 import lecho.lib.hellocharts.model.SubcolumnValue;
@@ -59,7 +61,8 @@ public class StatsFragment extends Fragment {
 
     void generateDefaultData() {
         int numSubcolumns = 1;
-        int numColumns = 8;
+        List<AxisValue> mAxisXValues = new ArrayList<AxisValue>();
+        int numColumns = Session.getUser().rutinas.size();
         // Column can have many subcolumns, here by default I use 1 subcolumn in each of 8 columns.
         List<Column> columns = new ArrayList<Column>();
         List<SubcolumnValue> values;
@@ -67,9 +70,9 @@ public class StatsFragment extends Fragment {
 
             values = new ArrayList<SubcolumnValue>();
             for (int j = 0; j < numSubcolumns; ++j) {
-                values.add(new SubcolumnValue((float) Math.random() * 50f + 5, ChartUtils.pickColor()));
+                values.add(new SubcolumnValue(Session.getUser().rutinas.get(i).numero_usos, ChartUtils.pickColor()));
             }
-
+            mAxisXValues.add(new AxisValue(i).setLabel(Session.getUser().rutinas.get(i).getNombre()));
             Column column = new Column(values);
             column.setHasLabels(hasLabels);
             column.setHasLabelsOnlyForSelected(hasLabelForSelected);
@@ -77,9 +80,9 @@ public class StatsFragment extends Fragment {
         }
 
         data = new ColumnChartData(columns);
-
+        Axis axisX = new Axis();;
         if (hasAxes) {
-            Axis axisX = new Axis();
+
             Axis axisY = new Axis().setHasLines(true);
             if (hasAxesNames) {
                 axisX.setName("Axis X");
@@ -91,7 +94,7 @@ public class StatsFragment extends Fragment {
             data.setAxisXBottom(null);
             data.setAxisYLeft(null);
         }
-
+        axisX.setValues(mAxisXValues);
         chart.setColumnChartData(data);
     }
 

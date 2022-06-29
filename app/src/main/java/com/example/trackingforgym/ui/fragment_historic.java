@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trackingforgym.R;
 import com.example.trackingforgym.data.RutineHistoric;
+import com.example.trackingforgym.data.Session;
 import com.example.trackingforgym.databinding.FragmentHistoricBinding;
 
 import java.util.Date;
@@ -139,19 +140,22 @@ public class fragment_historic extends Fragment {
         recycler = (RecyclerView) root.findViewById(R.id.recyclerHistorialRutinas);
         recycler.setLayoutManager(new LinearLayoutManager(root.getContext(),LinearLayoutManager.VERTICAL, false));
 
-        RutineHistoric[] rutinas={
-                new RutineHistoric("#E91E63", "Pierna", new Date(2020,10,18)),
-                new RutineHistoric("#F44336", "tren Sup", new Date(2021,1,6)),
-                new RutineHistoric("#03A9F4", "tren inf", new Date(2022,2,10)),
-                new RutineHistoric("#009688", "Pecho y tricep", new Date(2020,10,16)),
-                new RutineHistoric("#673AB7", "Gluteo", new Date(2022,10,16)),
-                new RutineHistoric("#E91E63", "Pierna", new Date(2028,7,26)),
-                new RutineHistoric("#F44336", "tren Sup", new Date(2021,10,14)),
-                new RutineHistoric("#03A9F4", "tren inf", new Date(2019,5,6)),
-                new RutineHistoric("#009688", "Pecho y tricep", new Date(2018,10,9)),
-                new RutineHistoric("#009688", "Pecho y tricep", new Date(2022,5,16)),
-                new RutineHistoric("#673AB7", "Gluteo", new Date(2020,10,17))
-        };
+        /*RutineHistoric[] rutinas={
+                new RutineHistoric("#E91E63", "Pierna", 234456),
+                new RutineHistoric("#F44336", "tren Sup", 234456),
+                new RutineHistoric("#03A9F4", "tren inf", 234456),
+                new RutineHistoric("#009688", "Pecho y tricep", 234456),
+                new RutineHistoric("#673AB7", "Gluteo", 234456),
+                new RutineHistoric("#E91E63", "Pierna", 234456),
+                new RutineHistoric("#F44336", "tren Sup", 234456)
+        };*/
+
+        RutineHistoric[] rutinas = new RutineHistoric[Session.getUser().entrenamientos.size()];
+        int c=0;
+        for(RutineHistoric i : Session.getUser().entrenamientos){
+            rutinas[c]=i;
+            c++;
+        }
 
         adapter=new Adaptador_Historic_Layout(rutinas);
         adapter.setOnClickListener(new View.OnClickListener() {

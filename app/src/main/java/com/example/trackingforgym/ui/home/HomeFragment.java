@@ -1,5 +1,6 @@
 package com.example.trackingforgym.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,14 +11,21 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.trackingforgym.MainActivity;
 import com.example.trackingforgym.R;
+import com.example.trackingforgym.data.Ejercicio;
 import com.example.trackingforgym.data.Rutine;
+import com.example.trackingforgym.data.RutineHistoric;
+import com.example.trackingforgym.data.Serie;
+import com.example.trackingforgym.data.Session;
 import com.example.trackingforgym.databinding.FragmentHomeBinding;
+import com.example.trackingforgym.registro_por_rutina;
 import com.example.trackingforgym.ui.Adaptador_rutina_layout;
 
 import java.util.Random;
@@ -40,7 +48,7 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         root = binding.getRoot();
-        setElements();
+        //setElements();
 
         //final TextView textView = binding.textHome;
         /*homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -52,6 +60,16 @@ public class HomeFragment extends Fragment {
 
         return root;
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        root =view;
+        setElements();
+        System.out.println("cambadio helo");
+    }
+
     public void setElements(){
         contenedorSeekBarRutina=(LinearLayout) root.findViewById(R.id.contenerdorSeekBarEntrenamiento);
         btnComoEstuboHoy=root.findViewById(R.id.btnComoEstuboHoy);
@@ -66,6 +84,14 @@ public class HomeFragment extends Fragment {
 
     public void hideShowSeekBar(View view){
         System.out.println("oprimido");
+
+        for(RutineHistoric e : Session.getUser().entrenamientos){
+            System.out.print(e.getId()+" "+e.getColor()+" "+e.getNombre()+" "+e.getFecha().toString()+" | ");
+            for(Serie g: e.series){
+                System.out.print(g.getNombre()+" "+g.getColor()+" "+g.getId()+" "+g.repeticiones +"| ");
+            }
+            System.out.println();
+        }
         if(contenedorSeekBarRutina.getVisibility()==View.VISIBLE)
             contenedorSeekBarRutina.setVisibility(View.GONE);
         else
@@ -111,18 +137,22 @@ public class HomeFragment extends Fragment {
     public void setRecycler(){
 
         recycler = (RecyclerView) root.findViewById(R.id.contenedorRutinas);
-        recycler.setLayoutManager(new LinearLayoutManager(root.getContext(),LinearLayoutManager.HORIZONTAL, true));
+        recycler.setLayoutManager(new LinearLayoutManager(root.getContext(),LinearLayoutManager.HORIZONTAL, false));
 
-        /*String[] rutinas={
-                "1","2","3","4","5","6","31","14","11","121","131","114"
-        };*/
         Rutine[] rutinas= {
                 new Rutine("#E91E63", "Pierna", 1),
-                new Rutine("#F44336", "tren Sup",8),
-                new Rutine("#03A9F4", "tren inf",50),
-                new Rutine("#009688", "Pecho y tricep",2),
-                new Rutine("#673AB7", "Gluteo",6)
+                new Rutine("#F44336", "tren Sup",8)
         };
+
+        if(Session.getUser()!=null){
+            System.out.println("saliendo");
+            rutinas = new Rutine[Session.getUser().rutinas.size()];
+            int c=0;
+            for(Rutine s: Session.getUser().rutinas){
+                rutinas[c]=s;
+                c++;
+            }
+        }
 
         rutinas = heapSort(rutinas);
 
@@ -136,10 +166,22 @@ public class HomeFragment extends Fragment {
         recycler.setAdapter(adapter);
     }
 
-    public void abrirRutinaEspecifica(String str){
-        System.out.println(str);
-        Toast toast = Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT);
+    public void abrirRutinaEspecifica(Rutine r){
+        System.out.println(r.getNombre());
+        Toast toast = Toast.makeText(getActivity(), r.getNombre(), Toast.LENGTH_SHORT);
+        abrirRegistroRutina(r);
         toast.show();
+    }
+    public void abrirRegistroRutina(Rutine r){
+        Intent intent = new Intent(getActivity(), registro_por_rutina.class);
+        intent.putExtra("rutina",r);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        setRecycler();
     }
 
     @Override

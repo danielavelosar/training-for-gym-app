@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.trackingforgym.data.Rutine;
 import com.example.trackingforgym.data.Session;
 import com.example.trackingforgym.databinding.ActivityMainBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     NavController navController;
+
+    public void abrirRegistroRutina(){
+        Intent intent = new Intent(this , registro_por_rutina.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                //abrirRegistroRutina();
             }
         });
 
@@ -119,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
             definirSession();
             System.out.println("paso");
         }
+
         System.out.println("de vuelta");
     }
 
@@ -146,6 +154,23 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.btnCrearRutina:
+                System.out.println("rutina");
+                navController.navigate(R.id.fragment_creacion_rutina);
+                return true;
+            case R.id.btnCrearEjercicio:
+                System.out.println("ejercicio");
+                navController.navigate(R.id.fragment_creacion_ejercicio);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

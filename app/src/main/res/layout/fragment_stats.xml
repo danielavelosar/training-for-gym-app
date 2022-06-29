@@ -7,41 +7,77 @@
     tools:context=".ui.stats.StatsFragment">
 
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="8dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView11"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="    " />
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="8dp"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="8dp">
 
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
-            android:text="Desempeño"
-            android:textSize="22sp" />
-
-        <FrameLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_marginHorizontal="10dp"
-            tools:context="lecho.lib.hellocharts.samples.PieChartActivity"
-            tools:ignore="MergeRootFrame">
-
-            <lecho.lib.hellocharts.view.ColumnChartView
-                android:id="@+id/chart"
+            <TextView
+                android:id="@+id/textView11"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></lecho.lib.hellocharts.view.ColumnChartView>
+                android:layout_height="wrap_content"
+                android:text="    " />
 
-        </FrameLayout>
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:text="Desempeño"
+                android:textSize="22sp" />
+
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginHorizontal="10dp"
+                tools:context="lecho.lib.hellocharts.samples.PieChartActivity"
+                tools:ignore="MergeRootFrame">
+
+                <lecho.lib.hellocharts.view.ColumnChartView
+                    android:id="@+id/chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></lecho.lib.hellocharts.view.ColumnChartView>
+
+            </FrameLayout>
+            <FrameLayout
+                android:id="@+id/container1"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginHorizontal="10dp"
+                tools:context="lecho.lib.hellocharts.samples.PieChartActivity"
+                tools:ignore="MergeRootFrame">
+
+                <lecho.lib.hellocharts.view.ColumnChartView
+                    android:id="@+id/chart1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></lecho.lib.hellocharts.view.ColumnChartView>
+
+            </FrameLayout>
+            <FrameLayout
+                android:id="@+id/container11"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginHorizontal="10dp"
+                tools:context="lecho.lib.hellocharts.samples.PieChartActivity"
+                tools:ignore="MergeRootFrame">
+
+                <lecho.lib.hellocharts.view.ColumnChartView
+                    android:id="@+id/chart11"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></lecho.lib.hellocharts.view.ColumnChartView>
+
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

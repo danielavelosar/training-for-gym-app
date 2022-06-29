@@ -1,12 +1,18 @@
 package com.example.trackingforgym.data;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class DataBase {
@@ -76,5 +82,59 @@ public class DataBase {
         ejs=ejs.substring(0,ejs.length()-1);
         URL=BaseURL+"/addRutina.php?nombre="+r.getNombre()+"&color="+r.getColor()+"&ejercicios="+ejs+"&usuario="+Session.getUser().id;
         return makeRequest(URL);
+    }
+
+    public static ArrayList<Rutine> getRutinasUser(int id){
+
+        URL=BaseURL+"/getRutinas.php?usuario="+id;
+        String res= makeRequest(URL);
+        JsonParser parser = new JsonParser();
+        JsonArray gsonArr = parser.parse(res).getAsJsonArray();
+        ArrayList<Rutine> d=new ArrayList<Rutine>();
+        for (JsonElement obj : gsonArr) {
+            JsonObject gsonObj = obj.getAsJsonObject();
+
+            Rutine a= new Rutine(gsonObj.get("id_rutina").getAsInt(),id,gsonObj.get("color_rutina").getAsString(),gsonObj.get("nombre_rutina").getAsString(),gsonObj.get("usos").getAsInt());
+            URL=BaseURL+"/getEjerciciosRutina.php?rutina="+a.getId();
+            String res1=makeRequest(URL);
+            System.out.println(res1);
+            JsonArray gsonArr1 = parser.parse(res1).getAsJsonArray();
+            for(JsonElement p: gsonArr1){
+                JsonObject objeto =p.getAsJsonObject();
+                Ejercicio eje=new Ejercicio(objeto.get("id_ejercicio").getAsInt(),objeto.get("nombre").getAsString(),objeto.get("color").getAsString(),objeto.get("parteCuerpo").getAsString());
+                a.ejercicios.add(eje);
+            }
+            d.add(a);
+            System.out.println();
+        }
+        System.out.println(res);
+        return d;
+    }
+
+    public static ArrayList<RutineHistoric> getEntrenamientos(int id){
+        URL=BaseURL+"/getEntrenamientos.php?usuario="+id;
+        String res= makeRequest(URL);
+        System.out.println(res);
+        JsonParser parser = new JsonParser();
+        JsonArray gsonArr = parser.parse(res).getAsJsonArray();
+        ArrayList<RutineHistoric> d=new ArrayList<RutineHistoric>();
+        for (JsonElement obj : gsonArr) {
+            JsonObject gsonObj = obj.getAsJsonObject();
+
+            RutineHistoric a= new RutineHistoric(gsonObj.get("id_entrenamiento").getAsInt(),gsonObj.get("color_rutina").getAsString(),gsonObj.get("nombre_rutina").getAsString(),gsonObj.get("fecha").getAsInt(),gsonObj.get("esfuerzo").getAsInt());
+            URL=BaseURL+"/getSeries.php?entrenamiento="+a.getId();
+            String res1=makeRequest(URL);
+            System.out.println(res1);
+            JsonArray gsonArr1 = parser.parse(res1).getAsJsonArray();
+            for(JsonElement p: gsonArr1){
+                JsonObject objeto =p.getAsJsonObject();
+                Serie eje=new Serie(objeto.get("id_serie").getAsInt(),objeto.get("nombre").getAsString(),objeto.get("color").getAsString(),objeto.get("parteCuerpo").getAsString(),objeto.get("repeticiones").getAsInt());
+                a.series.add(eje);
+            }
+            d.add(a);
+            System.out.println();
+        }
+
+        return d;
     }
 }

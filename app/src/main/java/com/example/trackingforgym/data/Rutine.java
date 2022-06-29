@@ -1,8 +1,9 @@
 package com.example.trackingforgym.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Rutine {
+public class Rutine implements Serializable {
 
     private int id;
     private int idPropietario;
@@ -27,8 +28,11 @@ public class Rutine {
         this.nombre=nombre;
         this.numero_usos=0;
     }
+    public Rutine(int i,String color, String nombre ){
+        this(i,0, color,nombre,0);
+    }
     public Rutine(String color, String nombre ){
-        this(0,0,color,nombre,0);
+        this(0,Session.getUser().getId(), color,nombre,0);
     }
     public Rutine(String color, String nombre, int num){
         this(0,0,color,nombre,num);

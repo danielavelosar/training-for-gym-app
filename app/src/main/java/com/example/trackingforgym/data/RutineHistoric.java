@@ -1,24 +1,32 @@
 package com.example.trackingforgym.data;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 public class RutineHistoric extends Rutine{
-    private Date fecha;
+    private Fecha fecha;
+    int esfuerzo;
+    public ArrayList<Serie> series;
 
-    public RutineHistoric(String color, String nombre, Date fecha){
+    public RutineHistoric(String color, String nombre, int fecha){
         super(color, nombre);
-        this.fecha = fecha;
+        this.fecha = new Fecha(fecha);
+    }
+    public RutineHistoric(int id, String color, String nombre, int fecha, int esfu){
+        super(id, color, nombre);
+        this.fecha = new Fecha(fecha);
+        this.esfuerzo=esfu;
+        series = new ArrayList<Serie>();
     }
     public RutineHistoric(String color, String nombre){
         super(color, nombre);
-        fecha=null;
+        fecha=new Fecha();
     }
 
-    public Date getFecha() {
+    public Fecha getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setFecha(int fecha) {
+        this.fecha = new Fecha(fecha);
     }
 }

@@ -11,19 +11,23 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.trackingforgym.data.Ejercicio;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Rutinas_Adaptador extends RecyclerView.Adapter<Rutinas_Adaptador.ViewHolder> {
-    private List<Lista_Rutinas> mData;
+    //private List<Lista_Rutinas> mData;
+    private ArrayList<Ejercicio> mData;
     private LayoutInflater mInflater;
     private Context context;
     final Rutinas_Adaptador.OnItemClickListener listener;
 
     public interface OnItemClickListener {
-        void onItemClick(Lista_Rutinas item);
+        void onItemClick(Ejercicio item);
     }
 
-    public Rutinas_Adaptador(List<Lista_Rutinas> itemList,  Context context, Rutinas_Adaptador.OnItemClickListener listener) {
+    public Rutinas_Adaptador(ArrayList<Ejercicio> itemList,  Context context, Rutinas_Adaptador.OnItemClickListener listener) {
         this.mData = itemList;
         this.mInflater = LayoutInflater.from(context);
         this.context = context;
@@ -41,7 +45,7 @@ public class Rutinas_Adaptador extends RecyclerView.Adapter<Rutinas_Adaptador.Vi
         holder.bindData(mData.get(position));
     }
 
-    public void setItems(List<Lista_Rutinas> items){ mData=items; }
+    public void setItems(ArrayList<Ejercicio> items){ mData=items; }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iconImage;
@@ -54,10 +58,10 @@ public class Rutinas_Adaptador extends RecyclerView.Adapter<Rutinas_Adaptador.Vi
             status = itemView.findViewById(R.id.statusTextView);
             city = itemView.findViewById(R.id.cityTextView);
         }
-        void bindData (final Lista_Rutinas item){
-            iconImage.setColorFilter(Color.parseColor(item.getColo()), PorterDuff.Mode.SRC_IN);
+        void bindData (final Ejercicio item){
+            iconImage.setColorFilter(Color.parseColor(item.getColor()), PorterDuff.Mode.SRC_IN);
             nombre.setText(item.getNombre());
-            status.setText(item.getStatus());
+            //status.setText(item.getStatus());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -25,8 +25,8 @@ public class Adaptador_rutina_layout extends RecyclerView.Adapter<Adaptador_ruti
         this.listener=listener;
     }
 
-    public String getDatos (int i){
-        return localDataSet[i].getNombre();
+    public Rutine getDatos (int i){
+        return localDataSet[i];
     };
 
     @Override
@@ -81,9 +81,9 @@ public class Adaptador_rutina_layout extends RecyclerView.Adapter<Adaptador_ruti
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        System.out.println(localDataSet[position]);
-        viewHolder.getTextView().setText(localDataSet[position].getNombre());
-        viewHolder.getImageView().setBackgroundColor(Color.parseColor(localDataSet[position].getColor()));
+        System.out.println("poniendo "+ localDataSet[position]);
+        viewHolder.getTextView().setText(localDataSet[position]==null?"":localDataSet[position].getNombre());
+        viewHolder.getImageView().setBackgroundColor(Color.parseColor(localDataSet[position]==null?"#62EA15":localDataSet[position].getColor()));
     }
 
     // Return the size of your dataset (invoked by the layout manager)
