@@ -91,5 +91,9 @@
         android:name="com.example.trackingforgym.ui.fragment_calculo_rm"
         android:label="Calculo RM"
         tools:layout="@layout/fragment_calculo_rm" />
+    <action
+        android:id="@+id/action_global_nav_home"
+        app:destination="@id/nav_home"
+        app:popUpTo="@id/fragment_creacion_rutina" />
 
 </navigation>

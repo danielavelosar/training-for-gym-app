@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="35dp"
-                android:text="Como estubo tu entrenamiento hoy" />
+                android:text="Como estuvo tu entrenamiento hoy" />
 
             <LinearLayout
                 android:id="@+id/contenerdorSeekBarEntrenamiento"

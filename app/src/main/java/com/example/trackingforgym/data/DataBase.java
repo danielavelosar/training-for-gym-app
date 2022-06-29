@@ -57,7 +57,7 @@ public class DataBase {
     }
 
     public static String addEjercicio(Ejercicio j) {
-        URL=BaseURL+"/addEjercicio.php?nombre="+j.nombre+"&color="+j.color+"&parteCuerpo="+j.parteCuerpo+"&usuario="+Session.getUser().id;
+        URL=BaseURL+"/addEjercicio.php?nombre="+j.nombre+"&color="+j.color+"&parteCuerpo="+j.parteCuerpo+"&usuario="+10;
         return makeRequest(URL);
     }
 

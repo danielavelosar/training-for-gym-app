@@ -15,8 +15,10 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.trackingforgym.data.Rutine;
 import com.example.trackingforgym.data.Session;
 import com.example.trackingforgym.databinding.ActivityMainBinding;
+import com.example.trackingforgym.ui.fragment_creacion_rutina;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -46,9 +48,14 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "creando una rutina ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-            }
+                navController.navigate(R.id.fragment_creacion_rutina);
+            };
+  //        public void openCreacionRutina(){
+  //            getSupportFragmentManager().beginTransaction().replace(R.id.container, new fragment_creacion_rutina()).commit();
+  //        };
+
         });
 
         DrawerLayout drawer = binding.drawerLayout;
