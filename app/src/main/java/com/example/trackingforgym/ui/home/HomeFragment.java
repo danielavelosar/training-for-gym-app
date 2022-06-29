@@ -140,8 +140,8 @@ public class HomeFragment extends Fragment {
         recycler.setLayoutManager(new LinearLayoutManager(root.getContext(),LinearLayoutManager.HORIZONTAL, false));
 
         Rutine[] rutinas= {
-                new Rutine("#E91E63", "Pierna", 1),
-                new Rutine("#F44336", "tren Sup",8)
+                new Rutine("390707", "Pierna", 1),
+                new Rutine("F44336", "tren Sup",8)
         };
 
         if(Session.getUser()!=null){

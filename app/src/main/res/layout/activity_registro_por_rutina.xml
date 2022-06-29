@@ -7,14 +7,24 @@
     android:layout_height="match_parent"
     tools:context=".registro_por_rutina">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_rutinas"
-        android:layout_width="364dp"
-        android:layout_height="439dp"
-        android:layout_marginTop="250dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_rutinas"
+            android:layout_width="match_parent"
+            android:layout_height="207dp"
+            android:layout_marginTop="270dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <Button
+            android:id="@+id/buttonFinalizarEntrenamiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Finalizar" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

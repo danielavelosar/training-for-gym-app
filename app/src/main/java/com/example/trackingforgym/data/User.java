@@ -7,6 +7,8 @@ public class User {
     String correo;
     public ArrayList<Rutine> rutinas;
     public ArrayList<RutineHistoric> entrenamientos;
+    public ArrayList<Ejercicio> ejercicios;
+    public RutineHistoric nuevoEntrenamiento;
 
     public int getId() {
         return id;
@@ -33,6 +35,7 @@ public class User {
         correo=null;
         rutinas=new ArrayList<Rutine>();
         entrenamientos=new ArrayList<RutineHistoric>();
+        nuevoEntrenamiento= new RutineHistoric(0,"","",0,0);
     }
     public User(int ide, String email){
         id=ide;

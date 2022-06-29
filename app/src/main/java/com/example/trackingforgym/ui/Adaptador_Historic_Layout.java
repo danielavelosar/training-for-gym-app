@@ -16,7 +16,8 @@ import sun.bob.mcalendarview.MCalendarView;
 
 public class Adaptador_Historic_Layout extends RecyclerView.Adapter<Adaptador_Historic_Layout.ViewHolder> implements View.OnClickListener{
 
-    private RutineHistoric[] localDataSet;
+    public RutineHistoric[] localDataSet;
+    public RutineHistoric[] localDataOriginal;
     View.OnClickListener listener;
 
     public void setOnClickListener(View.OnClickListener listener){
@@ -62,6 +63,7 @@ public class Adaptador_Historic_Layout extends RecyclerView.Adapter<Adaptador_Hi
 
     public Adaptador_Historic_Layout(RutineHistoric[] dataSet) {
         localDataSet = dataSet;
+        localDataOriginal=dataSet;
     }
 
 
@@ -86,7 +88,7 @@ public class Adaptador_Historic_Layout extends RecyclerView.Adapter<Adaptador_Hi
         //viewHolder.getFechaTextView().setText(localDataSet[position].getFecha().toString());
         viewHolder.getFechaTextView().setText(localDataSet[position].getFecha().toString());
         viewHolder.getTextView().setText(localDataSet[position].getNombre());
-        viewHolder.getImageView().setBackgroundColor(Color.parseColor(localDataSet[position].getColor()));
+        viewHolder.getImageView().setBackgroundColor(Color.parseColor("#"+localDataSet[position].getColor()));
 
     }
 

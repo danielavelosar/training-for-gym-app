@@ -2,7 +2,7 @@ package com.example.trackingforgym.data;
 import java.util.Calendar;
 
 public class Fecha {
-    long fecha;
+    public long fecha;
     Calendar cal;
 
     public Fecha(){

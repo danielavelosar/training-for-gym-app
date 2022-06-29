@@ -77,4 +77,8 @@ public class Rutine implements Serializable {
     public String upload(){
         return DataBase.addRutine(this);
     }
+
+    public void setIdDataBase(){
+        this.id= DataBase.getRutina(this).id;
+    }
 }

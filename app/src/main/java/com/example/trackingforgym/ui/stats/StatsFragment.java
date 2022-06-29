@@ -85,8 +85,8 @@ public class StatsFragment extends Fragment {
 
             Axis axisY = new Axis().setHasLines(true);
             if (hasAxesNames) {
-                axisX.setName("Axis X");
-                axisY.setName("Axis Y");
+                axisX.setName("Rutina");
+                axisY.setName("Usos");
             }
             data.setAxisXBottom(axisX);
             data.setAxisYLeft(axisY);

@@ -9,122 +9,101 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ImageButton
-        android:id="@+id/button_cambiar_emoji"
-        android:layout_width="87dp"
-        android:layout_height="73dp"
-        android:layout_marginStart="162dp"
-        android:layout_marginTop="90dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginBottom="568dp"
-        android:backgroundTint="#FAFAFA"
-        android:src="@android:drawable/btn_star_big_on"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/text_cambiar_emoji"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cambiar Emoji"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_cambiar_emoji" />
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="206dp">
 
-    <TextView
-        android:id="@+id/text_crear_rutina"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Crear Rutina"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.101"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.005" />
+        <TextView
+            android:id="@+id/text_crear_rutina"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Crear Rutina"
+            android:textAlignment="center"
+            android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/text_comentario"
-        android:layout_width="90dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="270dp"
-        android:text="Comentario"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.846"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView_ejercicios_de_rutina" />
+        <EditText
+            android:id="@+id/editText_nombre_rutina"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="4dp"
+            android:hint="Nombre de la rutina" />
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="277dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="70dp"
-        android:hint="ingresar comentario"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_comentario" />
+        <androidx.recyclerview.widget.RecyclerView
 
-    <EditText
-        android:id="@+id/editText_nombre_rutina"
-        android:layout_width="377dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="4dp"
-        android:hint="Nombre de la rutina"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.533"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_cambiar_emoji" />
+            android:id="@+id/recyclerView_ejercicios_de_rutina"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            tools:ignore="MissingConstraints" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_agregar_ejercicios"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:clickable="true"
-        android:src="@drawable/ic_baseline_add_24"
-        app:backgroundTint="#FFC107"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.87"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView_ejercicios_de_rutina"
-        tools:ignore="MissingConstraints" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/button_crear"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="162dp"
-        android:backgroundTint="#FFFFFF"
-        android:text="CREAR"
-        android:textColor="#9C27B0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Agregar ejercicio"
+                android:textAlignment="center"
+                android:textSize="18sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/button_agregar_ejercicios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="28dp"
+                android:clickable="true"
+                android:src="@drawable/ic_baseline_add_24"
+                app:backgroundTint="#FFC107"
+                tools:ignore="MissingConstraints" />
 
-        android:id="@+id/recyclerView_ejercicios_de_rutina"
-        android:layout_width="345dp"
-        android:layout_height="173dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_nombre_rutina"
-        tools:ignore="MissingConstraints" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_DEfColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="Color Rutina" />
+
+            <View
+                android:id="@+id/preview_selected_color1"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/darker_gray" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_crear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:backgroundTint="#FFFFFF"
+            android:text="CREAR"
+            android:textColor="#9C27B0" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

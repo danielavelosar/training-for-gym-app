@@ -83,7 +83,7 @@ public class Adaptador_rutina_layout extends RecyclerView.Adapter<Adaptador_ruti
         // contents of the view with that element
         System.out.println("poniendo "+ localDataSet[position]);
         viewHolder.getTextView().setText(localDataSet[position]==null?"":localDataSet[position].getNombre());
-        viewHolder.getImageView().setBackgroundColor(Color.parseColor(localDataSet[position]==null?"#62EA15":localDataSet[position].getColor()));
+        viewHolder.getImageView().setBackgroundColor(Color.parseColor(localDataSet[position]==null?"#62EA15":"#"+localDataSet[position].getColor()));
     }
 
     // Return the size of your dataset (invoked by the layout manager)

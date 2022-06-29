@@ -59,7 +59,7 @@ public class Rutinas_Adaptador extends RecyclerView.Adapter<Rutinas_Adaptador.Vi
             city = itemView.findViewById(R.id.cityTextView);
         }
         void bindData (final Ejercicio item){
-            iconImage.setColorFilter(Color.parseColor(item.getColor()), PorterDuff.Mode.SRC_IN);
+            iconImage.setColorFilter(Color.parseColor("#"+item.getColor()), PorterDuff.Mode.SRC_IN);
             nombre.setText(item.getNombre());
             //status.setText(item.getStatus());
             itemView.setOnClickListener(new View.OnClickListener() {

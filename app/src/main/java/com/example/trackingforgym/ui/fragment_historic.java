@@ -15,10 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trackingforgym.R;
+import com.example.trackingforgym.data.HashSet;
 import com.example.trackingforgym.data.RutineHistoric;
 import com.example.trackingforgym.data.Session;
 import com.example.trackingforgym.databinding.FragmentHistoricBinding;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import sun.bob.mcalendarview.MCalendarView;
@@ -32,6 +34,7 @@ import sun.bob.mcalendarview.vo.DateData;
  */
 public class fragment_historic extends Fragment {
     RecyclerView recycler;
+    HashSet<RutineHistoric> busqueda;
     ConstraintLayout contenedorCalendario;
     private FragmentHistoricBinding binding;
     View root;
@@ -74,6 +77,25 @@ public class fragment_historic extends Fragment {
         System.out.println("cambadio helo");
     }
 
+    public void buscar(int y, int m, int d){
+        Calendar cal = Calendar.getInstance();
+        cal.set(y,m-1,d);
+        long e = cal.getTimeInMillis()/86400000;
+        System.out.println(e+" "+cal.getTimeInMillis());
+        try{
+            RutineHistoric a = busqueda.getValue( (int ) e);
+
+            adapter.localDataSet = new RutineHistoric[1];
+            adapter.localDataSet[0]=a;
+            adapter.notifyDataSetChanged();
+        }catch (Exception z){
+            Toast.makeText(getActivity(), "no encontrado", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+    }
+
     public void setElements(){
 
         contenedorCalendario= (ConstraintLayout) root.findViewById(R.id.contenedorCalendario);
@@ -88,7 +110,8 @@ public class fragment_historic extends Fragment {
         calendarView.setOnDateClickListener(new OnDateClickListener() {
             @Override
             public void onDateClick(View view, DateData date) {
-                Toast.makeText(getContext(),  date.getYear()+"/"+date.getMonthString()+"/"+date.getDayString(), Toast.LENGTH_LONG).show();
+                buscar(date.getYear(), date.getMonth(), date.getDay());
+                //Toast.makeText(getContext(),  date.getYear()+"/"+date.getMonthString()+"/"+date.getDayString(), Toast.LENGTH_LONG).show();
             }
         });
 
@@ -151,8 +174,10 @@ public class fragment_historic extends Fragment {
         };*/
 
         RutineHistoric[] rutinas = new RutineHistoric[Session.getUser().entrenamientos.size()];
+        busqueda = new HashSet<RutineHistoric>(100000);
         int c=0;
         for(RutineHistoric i : Session.getUser().entrenamientos){
+            busqueda.add((int) i.getFecha().fecha, i);
             rutinas[c]=i;
             c++;
         }
@@ -167,7 +192,7 @@ public class fragment_historic extends Fragment {
         recycler.setAdapter(adapter);
 
         for(RutineHistoric i:rutinas){
-            calendarView.markDate(i.getFecha().getYear(), i.getFecha().getMonth(), i.getFecha().getDay());
+            calendarView.markDate(i.getFecha().getYear(), i.getFecha().getMonth()+1, i.getFecha().getDay());
         }
     }
 

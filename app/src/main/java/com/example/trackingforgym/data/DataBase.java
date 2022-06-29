@@ -67,10 +67,49 @@ public class DataBase {
         return makeRequest(URL);
     }
 
+    public static String addEntrenamiento(RutineHistoric j) {
+        URL=BaseURL+"/addEntrenamiento.php?usuario="+Session.getUser().getId()+"&rutina="+j.idPadre+"&fecha="+ j.getFecha().fecha+"&esfuerzo="+0;
+        return makeRequest(URL);
+    }
+    public static String addSerie(int id, Serie j) {
+        URL=BaseURL+"/addSerie.php?entrenamiento="+id+"&ejercicio="+j.ejercicio+"&repeticiones="+j.repeticiones;
+        return makeRequest(URL);
+    }
+
+    public static RutineHistoric getEntrenamiento(RutineHistoric j) {
+        URL=BaseURL+"/getEntrenamiento.php?usuario="+Session.getUser().getId()+"&rutina="+j.idPadre+"&fecha="+j.getFecha().fecha;
+        String res= makeRequest(URL);
+        JsonParser parser = new JsonParser();
+        JsonArray gsonArr = parser.parse(res).getAsJsonArray();
+        ArrayList<RutineHistoric> d=new ArrayList<RutineHistoric>();
+        for (JsonElement obj : gsonArr) {
+            JsonObject gsonObj = obj.getAsJsonObject();
+
+            RutineHistoric a= new RutineHistoric(gsonObj.get("id_entrenamiento").getAsInt());
+            d.add(a);
+            System.out.println();
+        }
+        System.out.println(res);
+        return d.get(0);
+    }
+
+
+    /*public static String addSerie(int id, Serie j) {
+        URL=BaseURL+"/addEntrenamiento.php?usuario="+Session.getUser().getId()+"&rutina="+j.idPadre+"&fecha="+ j.getFecha().fecha+"&esfuerzo="+0;
+        return makeRequest(URL);
+    }*/
+
+
     public static Ejercicio getEjercicio(Ejercicio j){
         URL=BaseURL+"/getEjercicio.php?nombre="+j.nombre+"&color="+j.color+"&parteCuerpo="+j.parteCuerpo;
         String res =makeRequest(URL);
         Ejercicio[] ej=gson.fromJson(res , Ejercicio[].class);
+        return ej[0];
+    }
+    public static Rutine getRutina(Rutine j){
+        URL=BaseURL+"/getRutina.php?nombre="+j.getNombre()+"&color="+j.getColor();
+        String res =makeRequest(URL);
+        Rutine[] ej=gson.fromJson(res , Rutine[].class);
         return ej[0];
     }
 
@@ -128,13 +167,32 @@ public class DataBase {
             JsonArray gsonArr1 = parser.parse(res1).getAsJsonArray();
             for(JsonElement p: gsonArr1){
                 JsonObject objeto =p.getAsJsonObject();
-                Serie eje=new Serie(objeto.get("id_serie").getAsInt(),objeto.get("nombre").getAsString(),objeto.get("color").getAsString(),objeto.get("parteCuerpo").getAsString(),objeto.get("repeticiones").getAsInt());
+                Serie eje=new Serie(objeto.get("id_serie").getAsInt(),objeto.get("nombre").getAsString(),objeto.get("color").getAsString(),objeto.get("parteCuerpo").getAsString(),objeto.get("repeticiones").getAsInt(),0);
                 a.series.add(eje);
             }
             d.add(a);
             System.out.println();
         }
 
+
+
+        return d;
+    }
+
+    public static ArrayList<Ejercicio> getEjerciciosUsuario(int id){
+        URL=BaseURL+"/getEjerciciosUsuario.php?usuario="+id;
+        String res= makeRequest(URL);
+        System.out.println(res);
+        JsonParser parser = new JsonParser();
+        JsonArray gsonArr = parser.parse(res).getAsJsonArray();
+        ArrayList<Ejercicio> d = new ArrayList<Ejercicio>();
+        for (JsonElement obj : gsonArr) {
+            JsonObject gsonObj = obj.getAsJsonObject();
+
+            Ejercicio a= new Ejercicio(gsonObj.get("id_ejercicio").getAsInt(),gsonObj.get("nombre").getAsString(),gsonObj.get("color").getAsString(),gsonObj.get("parteCuerpo").getAsString());
+            d.add(a);
+            System.out.println();
+        }
         return d;
     }
 }

@@ -42,6 +42,7 @@ public class login extends AppCompatActivity {
             User usuario = DataBase.getUser(userEmail.getText().toString(),userPasssword.getText().toString());
             usuario.rutinas=DataBase.getRutinasUser(usuario.getId());
             usuario.entrenamientos=DataBase.getEntrenamientos(usuario.getId());
+            usuario.ejercicios=DataBase.getEjerciciosUsuario(usuario.getId());
             Session.setUser(usuario);
             Session.setSession(true);
             System.out.println(Session.getUser().getId());

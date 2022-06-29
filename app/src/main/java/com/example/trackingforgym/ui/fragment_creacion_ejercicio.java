@@ -1,5 +1,6 @@
 package com.example.trackingforgym.ui;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,11 @@ import androidx.navigation.Navigation;
 import com.example.trackingforgym.R;
 import com.example.trackingforgym.data.Ejercicio;
 import com.example.trackingforgym.data.Rutine;
+import com.example.trackingforgym.data.Session;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
+import yuku.ambilwarna.AmbilWarnaDialog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,7 +28,11 @@ import com.google.android.material.snackbar.Snackbar;
  */
 public class fragment_creacion_ejercicio extends Fragment {
     EditText nombreEjercicio;
+    EditText editParteCuerpo;
     Button crearEjercicio;
+    Button elegirColor;
+    private View mColorPreview;
+    private int mDefaultColor;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,14 +46,7 @@ public class fragment_creacion_ejercicio extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment fragment_creacion_ejercicio.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static fragment_creacion_ejercicio newInstance(String param1, String param2) {
         fragment_creacion_ejercicio fragment = new fragment_creacion_ejercicio();
@@ -75,19 +76,54 @@ public class fragment_creacion_ejercicio extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         nombreEjercicio = (EditText) view.findViewById(R.id.registro_nombre3);
-        crearEjercicio = (Button) view.findViewById(R.id.button_crear_ejercicio);
+        crearEjercicio = (Button) view.findViewById(R.id.btnSubirEjercicio);
+        mColorPreview = (View) view.findViewById(R.id.preview_selected_color);
+        editParteCuerpo=(EditText) view.findViewById(R.id.editTextParteCuerpo);
+        Fragment este = this;
         crearEjercicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 System.out.println("creo rutina");
                 Snackbar.make(view, "ejercicio  creado : " + nombreEjercicio.getText().toString(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                Ejercicio a = new Ejercicio("curl " + nombreEjercicio.getText().toString(), "azul", "bicep");
+                Ejercicio a = new Ejercicio( nombreEjercicio.getText().toString(),  Integer.toHexString(mDefaultColor).substring(2), editParteCuerpo.getText().toString());
                 a.upload();
                 a.setIdDataBase();
+                Session.getUser().ejercicios.add(a);
+                getActivity().onBackPressed();
             }
-
-            ;
         });
+        elegirColor  = (Button) view.findViewById(R.id.btnElegirColor);
+        elegirColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("eligiendo color");
+                openColorPickerDialogue();
+            }
+        });
+    }
+    public void openColorPickerDialogue() {
+        mDefaultColor = 150;
+        // the AmbilWarnaDialog callback needs 3 parameters
+        // one is the context, second is default color,
+        final AmbilWarnaDialog colorPickerDialogue = new AmbilWarnaDialog(getContext(), mDefaultColor,
+                new AmbilWarnaDialog.OnAmbilWarnaListener() {
+                    @Override
+                    public void onCancel(AmbilWarnaDialog dialog) {
+                        // leave this function body as
+                        // blank, as the dialog
+                        // automatically closes when
+                        // clicked on cancel button
+                    }
+
+                    @Override
+                    public void onOk(AmbilWarnaDialog dialog, int color) {
+
+                        mDefaultColor = color;
+                        System.out.println(mDefaultColor);
+                        mColorPreview.setBackgroundColor(mDefaultColor);
+                    }
+                });
+        colorPickerDialogue.show();
     }
 }
