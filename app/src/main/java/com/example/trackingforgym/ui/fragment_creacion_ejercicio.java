@@ -4,10 +4,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.trackingforgym.R;
+import com.example.trackingforgym.data.Ejercicio;
+import com.example.trackingforgym.data.Rutine;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,7 +23,8 @@ import com.example.trackingforgym.R;
  * create an instance of this fragment.
  */
 public class fragment_creacion_ejercicio extends Fragment {
-
+    EditText nombreEjercicio;
+    Button crearEjercicio;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -61,5 +70,24 @@ public class fragment_creacion_ejercicio extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_creacion_ejercicio, container, false);
+    }
+
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        nombreEjercicio = (EditText) view.findViewById(R.id.registro_nombre3);
+        crearEjercicio = (Button) view.findViewById(R.id.button_crear_ejercicio);
+        crearEjercicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("creo rutina");
+                Snackbar.make(view, "ejercicio  creado : " + nombreEjercicio.getText().toString(), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                Ejercicio a = new Ejercicio("curl " + nombreEjercicio.getText().toString(), "azul", "bicep");
+                a.upload();
+                a.setIdDataBase();
+            }
+
+            ;
+        });
     }
 }
